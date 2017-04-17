@@ -24,4 +24,6 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'^genre/', include('genre.urls')),
+    url(r'^treenav/', include('treenav.urls')),
+
 ]

@@ -1,0 +1,46 @@
+{% load mptt_tags %}
+<ul>
+    {% recursetree nodes %}
+        <li>
+            {{ node.label }} {{ node.id }}
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+
+<h2>Only first level items</h2>
+
+<ul>
+    {% recursetree nodes %}
+        <li>
+            {{ node.label }}
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {% if node.level == 1  %}
+                        {{ children }}
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+
+<h2>Going down</h2>
+<ul>
+    {% recursetree nodes %}
+
+        <li>
+            <a href="{% url "menudown" node.id node.parent_id node.lft node.rght %}">{{ node.label }}</a>
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+
